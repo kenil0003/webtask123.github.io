@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-
+scale=1.0">
+
+<title>Registration</title>
+<script>
+function validation()
+{
+var validname = /^[a-zA-Z]+$/;
+var fname = document.forms["registration_form"]["first_name"
+].value;
+if (!fname.match(validname)) {
+alert("First name should contains alphabets only.")
+return false;
+}
+var lname = document.forms["registration_form"]["last_name"]
+.value;
+if (!lname.match(validname)) {
+
+alert("Last name should contains alphabets only.")
+return false;
+}
+var age = document.forms["registration_form"]["age"].value;
+if (age < 18 && age > 99) {
+alert("Age must be above 18 years and below 99 years old
+.");
+return false;
+}
+var em = document.forms["registration_form"]["email"].value;
+var atpos = em.indexOf("@gmail");
+var dotpos = em.lastIndexOf(".");
+if (atpos < 1 || dotpos - atpos < 2) {
+alert("Please enter correct email ID (Use @gmail.com)");
+return false;
+}
+var dobyear = (new Date(document.forms["registration_form"][
+"DOB"].value)).getFullYear();
+var currentyear = (new Date()).getFullYear();
+var validateyear = currentyear - dobyear;
+if (fage != validateyear) {
+alert("Incorrect date of birth (Check your age that must
+be above 18.)");
+return false;
+}
+var phoneno = /^\+?([6-9]{1})\)?([0-9]{9})$/;
+var ph = document.forms["registration_form"]["mobile"].value
+;
+if (!phoneno.test(ph)) {
+alert("Please enter a valid phone number");
+return false;
+}
+}
+</script>
+
+<style>
+body{
+background-color: white;
+border: 5px solid black;
+}
+p {
+font-weight: bold;
+display: inline-block;
+margin-right: 70px;
+margin-left: 20px;
+}
+div{
+margin-left: 20px;
+}
+#submit{
+height: 30px;
+width: 150px;
+font-size: larger;
+font-weight: bold;
+margin-left: 100px;
+background-color: black;
+color: cornsilk;
+border-radius: 10px;
+margin-bottom: 10px;
+}
+#submit:hover{
+background-color: cornsilk;
+color: black;
+}
+</style>
+</head>
+<body>
+
+<h1 style="text-
+align: center;"><u>STUDENT REGISTRATION FORM</u></h1>
+
+<form name="registration_form" id="registration" method="POST" action="1.php" onsub
+mit="return validation()">
+<p>FIRST NAME : </p><input name="first_name" id="fname" type="te
+xt" required><br>
+<p>LAST NAME : </p><input name="last_name" id="lname" type="text
+" required><br>
+<p>YOUR AGE : </p><input name="age" id="age" type="number" requi
+red><br>
+<p>EMAIL ADDRESSS : </p><input name="email" id="email" type="ema
+il" required><br>
+<p>DOB(Date of Birth) : </p><input name="DOB" id="dob" type="date" required><br>
+<p>GENDER : </p><br>
+<div style="display: block;">
+<input name="gender" type="radio" value="male" required>Male
+</div>
+<div style="display: block;">
+<input name="gender" type="radio" value="female" required>Female
+</div>
+<div style="display: block;" >
+<input name="gender" type="radio" value="other"required>Other
+</div>
+<p>CHOOSE YOUR DEPARTMENT : </p>
+<select id="department" name="department">
+<option>B.Tech Computer Engineering(CE)</option>
+<option>B.Tech Information Technology(IT)</option>
+<option>M.Sc. IT</option>
+<option>B.B.A.</option>
+</select><br>
+<p>COLLEGE NAME : </p><input name="college_name" id="college" type="text" required><br>
+<p>MOBILE NUMBER : </p><input name="mobile" id="mobile" type="te
+xt" required><br>
+<p>RESIDENCE ADDRESS : </p><br><textarea name="address" id="address
+" cols="50" rows="5"
+
+style="background-color:yellow;color: black; margin-
+left: 20px;" required></textarea> <br><br>
+
+<input type="submit" value="Register" id="submit">
+</form>
+</body>
+</html>
+
