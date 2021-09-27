@@ -1,0 +1,18 @@
+<?php
+//include "dbconnect.php"; // Using database connection file here
+$con = mysqli_connect("localhost","root","");
+mysqli_select_db($con,"Student_mahi_238");
+$id = $_GET['id'];
+//$sql = "DELETE FROM student1 WHERE mobileno='$id'";
+$dele = mysqli_query($con,"DELETE FROM mahi where mobileno='$id'");
+if($dele)
+ {
+ mysqli_close($con); // Close connection
+ header("location:e.html"); // redirects to all records page
+exit;
+ }
+ else
+ {
+ echo mysqli_error();
+ } 
+?>

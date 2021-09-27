@@ -1,0 +1,28 @@
+<?php 
+$servername = "localhost"; 
+$username = "root"; 
+$password = ""; 
+$dbname = "mahipal"; 
+$flag=0;$conn = mysqli_connect($servername, $username, $password, $dbname); 
+if (isset($_POST['login'])) 
+{ 
+$a = $_POST['txtusername']; 
+$b = $_POST['txtpassword']; 
+$result = mysqli_query($conn,"SELECT * FROM mahipal"); 
+while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) 
+{ 
+if ($a == $row["Username"] && $b == $row["Password"]) 
+{ 
+$_SESSION['mahipal'] = $a; 
+header("Location:index.php"); 
+$flag=1; 
+} 
+} 
+if($flag==0) 
+{ 
+echo "Invalid Username Password"; 
+} 
+} 
+ ?> 
+ </body> 
+</html>

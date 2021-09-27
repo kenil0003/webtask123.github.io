@@ -1,0 +1,52 @@
+<?php
+//include "dbconnect.php"; // Using database connection file here
+$con = mysqli_connect("localhost","root","");
+mysqli_select_db($con,"Student_mahi_238");
+$id = $_GET['id']; // get id through query string
+// echo $id;
+$result = mysqli_query($con,"SELECT * FROM mahi where mobileno='$id'"); // select query
+$data = mysqli_fetch_array($result); 
+if(isset($_POST['update'])) // when click on Update button
+{
+ $t1=$_POST["ffname"];
+$t2=$_POST["llname"];
+$t3=$_POST["aage"];
+$t4=$_POST["eemail"];
+$t5=$_POST["ddob"];
+$t6=$_POST["ccollegename"];
+$t7=$_POST["mmobileno"];
+$t8=$_POST["aaddress"];
+$t9=$_POST["ggender"];
+$t10=$_POST["ddepartment"];
+ $edit = mysqli_query($con,"UPDATE mahi set fname='$t1',lname='$t2' ,age='$t3', 
+email='$t4',dob='$t5',gender='$t9',department='$t10',collegename='$t6', mobileno=$t7,address='$t8' 
+where mobileno='$id'");
+ 
+ if($edit)
+ {
+ mysqli_close($con); // Close connection
+ header("location:e.html"); // redirects to all records page
+ exit;
+ }
+ else
+ {
+ echo mysqli_error();
+} 
+}
+?>
+<h3>Update Data</h3>
+<form method="POST">
+<input type="text" name="ffname" id="fnamee" value="<?php echo $data['fname'] ?>">
+<input type="text" name="llname" id="lnamee" value="<?php echo $data['lname'] ?>">
+<input type="text" name="aage" id="agee" value="<?php echo $data['age'] ?>">
+<input type="text" name="eemail" id="emaill" value="<?php echo $data['email'] ?>">
+<input type="date" name="ddob" id="dobb" value="<?php echo $data['dob'] ?>">
+<input type="text" name="ggender" id="genderr" value="<?php echo $data['gender'] ?>">
+<input type="text" name="ddepartment" id="departmentt" value="<?php echo $data['department'] 
+?>">
+<input type="text" name="ccollegename" id="collegenamee" value="<?php echo $data['collegename'] 
+?>">
+<input type="text" name="mmobileno" id="mobilenoo" value="<?php echo $data['mobileno'] ?>">
+<input type="text" name="aaddress" id="addresss" value="<?php echo $data['address'] ?>">
+<input type="submit" name="update" value="Update">
+</form>

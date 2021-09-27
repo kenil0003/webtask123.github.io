@@ -1,0 +1,115 @@
+<?php
+$con = mysqli_connect("localhost","root","");
+$dbname="Student_mahi_238";
+if (!$con)
+{
+ echo "Error: Unable to connect to MySQL." . PHP_EOL;
+ echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+ // echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+ exit;
+// die('Could not connect: ' . mysql_error());
+}
+$sqldb = "CREATE DATABASE IF NOT EXISTS $dbname";
+if (!mysqli_query($con,$sqldb))
+{
+// die('Error: ' . mysql_error());
+echo "Error creating database: " . mysqli_error($con);
+}
+else
+{
+echo "1 db created\n";
+}
+mysqli_select_db($con,"Student_mahi_238");
+$sql_insert="CREATE TABLE IF NOT EXISTS mahi (fname text NOT NULL,lname text NOT 
+NULL,age integer NOT NULL,email VARCHAR(20) NOT NULL,dob DATE NOT NULL,gender 
+text NOT NULL,department text NOT NULL,collegename text NOT NULL,mobileno BIGINT NOT 
+NULL,address text NOT NULL,PRIMARY KEY (`mobileno`))";
+if(!mysqli_query($con,$sql_insert))
+{
+// die("table not create".mysql_error());
+echo "Error creating table: " . mysqli_error($con);
+}
+else
+{
+echo("table created");
+}
+$ffname=$_POST["fname"];
+$llname=$_POST["lname"];
+$aage=$_POST["age"];
+$eemail=$_POST["email"];
+$ddate=$_POST["date"];
+$ggender=$_POST["gender"];
+$ddepartment=$_POST["department"];
+$ccollage=$_POST["collage"];
+$mmobile=$_POST["mobile"];
+$aaddress=$_POST["address"];
+echo"</br>";
+echo $ffname;
+echo"</br>";
+echo $llname;
+echo"</br>";
+echo $aage;
+echo"</br>";
+echo $eemail;
+echo"</br>";
+echo $ddate;
+echo"</br>";
+echo $ccollage;
+echo"</br>";
+echo $mmobile;
+echo"</br>";
+echo $aaddress;
+echo"</br>";
+echo $ggender;
+echo"</br>";
+echo $ddepartment;
+$sql="INSERT INTO mahi 
+(fname,lname,age,email,dob,gender,department,collegename,mobileno,address) VALUES 
+('$ffname','$llname',$aage,'$eemail','$ddate','$ggender','$ddepartment','$ccollage',$mmobile,'$aaddress'
+)";
+if (!mysqli_query($con,$sql))
+{
+ // die('Error:in insert data ' . mysqli_error());
+ echo "Error inserting data: " . mysqli_error($con);
+}
+else{
+echo "1 record added";
+}
+$result = mysqli_query($con,"SELECT * FROM mahi");
+echo "<table border='1'>
+<tr>
+<th>Fname</th>
+<th>Lname</th>
+<th>Age</th>
+<th>Email</th>
+<th>DOB</th>
+<th>Gender</th>
+<th>Department</th>
+<th>Collegename</th>
+<th>Mobile</th>
+<th>Address</th>
+<th>Update</th>
+<th>Delete</th>
+</tr>";
+while($row = mysqli_fetch_array($result,MYSQLI_ASSOC))
+ {
+ echo "<tr>";
+ echo "<td>" . $row['fname'] . "</td>";
+ echo "<td>" . $row['lname'] . "</td>";
+ echo "<td>" . $row['age'] . "</td>";
+ echo "<td>" . $row['email'] . "</td>";
+ echo "<td>" . $row['dob'] . "</td>";
+ echo "<td>" . $row['gender'] . "</td>";
+ echo "<td>" . $row['department'] . "</td>";
+ echo "<td>" . $row['collegename'] . "</td>";
+echo "<td>" . $row['mobileno'] . "</td>";
+ echo "<td>" . $row['address'] . "</td>";?>
+<td><a href="update1.php?id=<?php echo $row['mobileno']; ?>">Edit</a>
+</td>
+ <td><a href="delete1.php?id=<?php echo $row['mobileno']; ?>">Delete</a></td>
+ <?php
+ echo "</tr>";
+ }
+echo "</table>";
+mysqli_close($con);
+?>

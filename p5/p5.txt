@@ -1,0 +1,24 @@
+<?php 
+session_start(); 
+?> 
+<html> 
+ <head> 
+ <title> Login </title> 
+ </head> 
+ <body> 
+ <form action="" method="post"> 
+ <h1 class="aa">Form</h1> 
+ <table> 
+ <tr> 
+ <td><label>Username: </label></td> 
+ <td><input type="text" name="txtusername" placeholder="Username"></td> 
+ </tr> 
+ <tr> 
+ <td><label>Password: </label></td> 
+ <td><input type="password" name="txtpassword" placeholder="Password"></td> 
+ </tr> 
+ <tr> 
+ <td><button type="submit" name="login" value="login">Enter</button></td> 
+ </tr> 
+ </table> 
+ </form> 
